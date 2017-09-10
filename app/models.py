@@ -295,6 +295,9 @@ class Post(db.Model):
     comments = db.relationship('Comment', backref='post', lazy='dynamic',
                                cascade='all, delete-orphan')
 
+    def delete(self):
+        db.session.delete(self)
+
     @staticmethod
     def generate_fake(count=100):
         from random import seed, randint

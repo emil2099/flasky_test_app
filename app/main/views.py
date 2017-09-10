@@ -160,9 +160,7 @@ def post_delete(id):
     if current_user != post.author and \
         not current_user.can(Permission.ADMINISTER):
         abort(403)
-    Post.query.filter_by(id=id).delete()
-    db.session.delete(post)
-    db.session.commit()
+    post.delete()
     return redirect(request.referrer or url_for('index'))
 
 

@@ -292,7 +292,8 @@ class Post(db.Model):
     body_html = db.Column(db.Text)
     timestamp = db.Column(db.DateTime, index=True, default=datetime.utcnow)
     author_id = db.Column(db.Integer, db.ForeignKey('users.id'))
-    comments = db.relationship('Comment', backref='post', lazy='dynamic')
+    comments = db.relationship('Comment', backref='post', lazy='dynamic',
+                               cascade='all, delete-orphan')
 
     @staticmethod
     def generate_fake(count=100):
